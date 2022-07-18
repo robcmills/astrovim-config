@@ -59,7 +59,7 @@ local config = {
     highlights = function(highlights)
       local C = require "default_theme.colors"
       highlights.Normal = { fg = C.fg, bg = C.bg }
-      highlights.CursorLine = { fg = C.none, bg = C.grey_4 }
+      highlights.CursorLine = { fg = C.none, bg = C.docker }
       return highlights
     end,
     plugins = { -- enable or disable extra plugin highlighting
@@ -295,6 +295,8 @@ local config = {
     vim.keymap.set("n", "J", "<C-d>")
     vim.keymap.set("n", "K", "<C-u>")
     vim.keymap.set("n", "s", "<cmd>wa<cr>", { desc = "Save" })
+    vim.keymap.set("n", "<leader>yf", ":let @+ = expand('%')<cr>", { desc = "Copy filepath" })
+    vim.keymap.set("n", "<leader>C", ":%bd<cr>", { desc = "Close all buffers" })
 
     -- Set autocommands
     vim.api.nvim_create_augroup("packer_conf", { clear = true })
