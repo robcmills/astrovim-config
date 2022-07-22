@@ -1,0 +1,111 @@
+diff --git a/lua/configs/aerial.lua b/lua/configs/aerial.lua
+index 9421661..cacc130 100644
+--- a/lua/configs/aerial.lua
++++ b/lua/configs/aerial.lua
+@@ -42,8 +42,8 @@ if status_ok then
+     },
+     on_attach = function(bufnr)
+       -- Jump forwards/backwards with '{' and '}'
+-      vim.keymap.set("n", "{", "<cmd>AerialPrev<cr>", { buffer = bufnr, desc = "Jump backwards in Aerial" })
+-      vim.keymap.set("n", "}", "<cmd>AerialNext<cr>", { buffer = bufnr, desc = "Jump forwards in Aerial" })
++      -- vim.keymap.set("n", "{", "<cmd>AerialPrev<cr>", { buffer = bufnr, desc = "Jump backwards in Aerial" })
++      -- vim.keymap.set("n", "}", "<cmd>AerialNext<cr>", { buffer = bufnr, desc = "Jump forwards in Aerial" })
+       -- Jump up the tree with '[[' or ']]'
+       vim.keymap.set("n", "[[", "<cmd>AerialPrevUp<cr>", { buffer = bufnr, desc = "Jump up and backwards in Aerial" })
+       vim.keymap.set("n", "]]", "<cmd>AerialNextUp<cr>", { buffer = bufnr, desc = "Jump up and forwards in Aerial" })
+diff --git a/lua/configs/cinnamon.lua b/lua/configs/cinnamon.lua
+deleted file mode 100644
+index c632d7d..0000000
+--- a/lua/configs/cinnamon.lua
++++ /dev/null
+@@ -1,4 +0,0 @@
+-local status_ok, cinnamon = pcall(require, "cinnamon")
+-if status_ok then
+-  cinnamon.setup(astronvim.user_plugin_opts("plugins.cinnamon", {}))
+-end
+diff --git a/lua/configs/lsp/handlers.lua b/lua/configs/lsp/handlers.lua
+index 95a9640..5db3bb8 100644
+--- a/lua/configs/lsp/handlers.lua
++++ b/lua/configs/lsp/handlers.lua
+@@ -20,7 +20,7 @@ local function lsp_highlight_document(client)
+ end
+ 
+ astronvim.lsp.on_attach = function(client, bufnr)
+-  map("n", "K", function()
++  map("n", "<leader>k", function()
+     vim.lsp.buf.hover()
+   end, { desc = "Hover symbol details", buffer = bufnr })
+   map("n", "<leader>la", function()
+diff --git a/lua/configs/telescope.lua b/lua/configs/telescope.lua
+index 9de40b1..b53d49c 100644
+--- a/lua/configs/telescope.lua
++++ b/lua/configs/telescope.lua
+@@ -8,7 +8,7 @@ if status_ok then
+   telescope.setup(astronvim.user_plugin_opts("plugins.telescope", {
+     defaults = {
+ 
+-      prompt_prefix = " ",
++      prompt_prefix = "  ",
+       selection_caret = "❯ ",
+       path_display = { "truncate" },
+       selection_strategy = "reset",
+@@ -17,14 +17,14 @@ if status_ok then
+       layout_config = {
+         horizontal = {
+           prompt_position = "top",
+-          preview_width = 0.55,
+-          results_width = 0.8,
++          preview_width = 0.4,
++          results_width = 0.6,
+         },
+         vertical = {
+           mirror = false,
+         },
+-        width = 0.87,
+-        height = 0.80,
++        width = 0.9,
++        height = 0.8,
+         preview_cutoff = 120,
+       },
+ 
+diff --git a/lua/core/mappings.lua b/lua/core/mappings.lua
+index 75dc52e..8f1d9cd 100644
+--- a/lua/core/mappings.lua
++++ b/lua/core/mappings.lua
+@@ -40,13 +40,13 @@ end
+ 
+ -- Navigate buffers
+ if is_available "bufferline.nvim" then
+-  map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer tab" })
+-  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer tab" })
++  map("n", "t", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer tab" })
++  map("n", "T", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer tab" })
+   map("n", ">b", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer tab right" })
+   map("n", "<b", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer tab left" })
+ else
+-  map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+-  map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
++  map("n", "t", "<cmd>bnext<cr>", { desc = "Next buffer" })
++  map("n", "T", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+ end
+ 
+ -- Comment
+diff --git a/lua/core/plugins.lua b/lua/core/plugins.lua
+index c8b2c68..34ca693 100644
+--- a/lua/core/plugins.lua
++++ b/lua/core/plugins.lua
+@@ -281,14 +281,6 @@ local astro_plugins = {
+     end,
+   },
+ 
+-  -- Smooth scrolling
+-  ["declancm/cinnamon.nvim"] = {
+-    event = { "BufRead", "BufNewFile" },
+-    config = function()
+-      require "configs.cinnamon"
+-    end,
+-  },
+-
+   -- Smooth escaping
+   ["max397574/better-escape.nvim"] = {
+     event = "InsertCharPre",

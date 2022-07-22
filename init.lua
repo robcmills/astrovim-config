@@ -24,6 +24,8 @@ local config = {
   options = {
     opt = {
       relativenumber = false, -- sets vim.opt.relativenumber
+      path = vim.opt.path + '**',
+      scrolloff = 0,
     },
     g = {
       mapleader = " ", -- sets vim.g.mapleader
@@ -96,6 +98,7 @@ local config = {
       -- ["goolord/alpha-nvim"] = { disable = true },
 
       -- You can also add new plugins here as well:
+      { "github/copilot.vim" },
       -- { "andweeb/presence.nvim" },
       -- {
       --   "ray-x/lsp_signature.nvim",
@@ -183,7 +186,9 @@ local config = {
       },
     },
     treesitter = {
+      auto_install = true,
       ensure_installed = { "lua" },
+      indent = { enable = true },
     },
     ["nvim-lsp-installer"] = {
       ensure_installed = { "sumneko_lua" },
@@ -245,7 +250,7 @@ local config = {
       -- "pyright"
     },
 
-    on_attach = function(client, bufnr)
+    on_attach = function(client)
       if (client.name == "eslint") then
         -- Stop eslint from attaching to files in node_modules to avoid excessive lint errors
         local is_node_module = false
@@ -320,8 +325,6 @@ local config = {
     --   },
     -- }
 
-    vim.opt.path = vim.opt.path + '**'
-    vim.opt.scrolloff = 0
   end,
 }
 
