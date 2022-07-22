@@ -52,40 +52,51 @@
 ### astrovim parity
 
 - [x] fix auto indentation
-- [ ] rename symbol dialog width bug
 - [ ] should pick up filesystem changes
   + autoread ?
 - [x] fix H top of screen and B bottom of screen
 - [x] remove margin lines from zt and zb
 - [x] show current file path in status line
 - [x] fix { and } not navigating to empty lines 
-- [x] s to save all buffers
+- [x] map s to save all buffers
 - [x] diagnostics update_in_insert = false
 - [ ] closing all buffers does not open an empty buffer
-- [ ] opening file finder should not render files until search is not empty
 - [x] lsp references should be a floating window that closes once selected
   + <leader>lR opens Telescope LSP References (but it's broken)
-- [ ] gitlens
+- [x] gitlens
+  + gitsigns plugin provides same functionality and more
+  + <leader>gl Preview git blame
+  + <leader>gp Preview git hunk
 - [x] split panes should each have their own bufferline
   + use tmux panes instead of neovim panes to solve this
-    C-b " Split window vertically
-    C-b % Split window horizontally
-- [ ] auto import paths not found for third party libraries
-- [x] filter lsp diagnostics to not show on third party libraries (node_modules)
-  + implemented custom on_attach function to manually stop eslint clients that exist in a node_modules workspace
+    <C-b> " Split window vertically
+    <C-b> % Split window horizontally
 - [ ] github copilot
+  + [ ] figure out tab mapping and collision with nvim-cmp
   + `vim.keymap.set("i", "<C-o>", "<cmd>:lua vim.fn['copilot#Accept']('')<cr>", { desc = "Accept Copilot suggestion" })`
-- [ ] goto definition ambiguous resolutions should open dialog to select
-- [ ] how to scope a live grep
-- [ ] lsp code actions auto import should prefer absolute paths
+- [ ] lsp
+  + [ ] auto import paths not found for third party libraries
+  + [ ] rename symbol dialog width bug
+  + [ ] code actions auto import should prefer absolute paths
+  + [ ] goto definition ambiguous resolutions should open dialog to select (not a window)
+  + [x] filter lsp diagnostics to not show on third party libraries (node_modules)
+    * implemented custom on_attach function to manually stop eslint clients that exist in a node_modules workspace
+
 - [ ] bufferline tabs should show full filename
 - [ ] dynamic width tabs (bufferline)
 - [x] show vim mode in text in status bar
 - [ ] TS and eslint errors in the sidebar "jiggling" pane width
   + Need to set width of gutter as a constant
 - [ ] adjust color theme to make comments slightly brighter
-- [ ] telescope find_files ignores .dotfiles
+- [ ] telescope
+  + [ ] how to scope a live grep
+  + [ ] find_files
+    * [ ] ignores .dotfiles
+    * [ ] should not render files until search is not empty
+    * [ ] should debounce?
+  + [ ] lsp references should group same filepaths
 - [ ] fix autoclose tags
+- [ ] swap neotree out in favor of vifm
 
 
 ### tmux
